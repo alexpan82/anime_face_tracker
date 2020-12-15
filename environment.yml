@@ -1,0 +1,6 @@
+name: anime_face_tracker
+dependencies:
+	- numpy
+	- python-mss
+	- pip:
+		- keyboard

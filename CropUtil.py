@@ -1,5 +1,4 @@
 import numpy as np
-import cv2
 from mss import mss
 import time
 import keyboard
@@ -25,7 +24,6 @@ class CropUtil:
                 print(reference_time)
             # Break
             if keyboard.read_key() == "q":
-                print('hi')
                 break
 
         return all_images
