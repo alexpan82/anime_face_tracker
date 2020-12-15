@@ -11,7 +11,7 @@ from CropUtil import CropUtil
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    cropper = CropUtil(3)
+    cropper = CropUtil(0.1, '/home/apan/PycharmProjects/anime_face')
     # Python list of images
-    image_list = cropper.capture()
-    print(len(image_list))
+    cropper.capture()
+
