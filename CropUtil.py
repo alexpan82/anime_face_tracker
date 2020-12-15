@@ -25,6 +25,7 @@ class CropUtil:
                 print(reference_time)
             # Break
             if keyboard.read_key() == "q":
+                print('hi')
                 break
 
         return all_images
