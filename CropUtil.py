@@ -1,4 +1,3 @@
-import numpy as np
 import mss
 import mss.tools
 import time
@@ -19,7 +18,6 @@ class CropUtil:
         if os.path.exists(self.image_path ):
             os.system("rm -R %s" % self.image_path )
         os.mkdir(self.image_path )
-
 
     def capture(self):
         sct = mss.mss()
