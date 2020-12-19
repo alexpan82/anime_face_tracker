@@ -18,4 +18,4 @@ if __name__ == '__main__':
 
     # Import captured pngs to cascade classifier
     detector = Detect('/home/apan/PycharmProjects/anime_face')
-    detector.FindFace()
+    detector.find_face()

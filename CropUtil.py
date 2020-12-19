@@ -3,6 +3,7 @@ import mss.tools
 import time
 import sys, signal
 import os
+import glob
 
 def signal_handler(signal, frame):
     print("\nprogram exiting gracefully")
@@ -19,6 +20,8 @@ class CropUtil:
             os.system("rm -R %s" % self.image_path )
         os.mkdir(self.image_path )
 
+    # Take screen caps at self.cap_rate frames per sec
+    # Return the cropped images
     def capture(self):
         sct = mss.mss()
         reference_time = time.time()
