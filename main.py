@@ -12,9 +12,9 @@ from CascadeDetect import Detect
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    cropper = CropUtil(0.1, '/home/apan/PycharmProjects/anime_face')
+    # cropper = CropUtil(0.1, '/home/apan/PycharmProjects/anime_face')
     # Screen cap each frame
-    cropper.capture()
+    # cropper.capture()
 
     # Import captured pngs to cascade classifier
     detector = Detect('/home/apan/PycharmProjects/anime_face')

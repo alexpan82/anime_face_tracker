@@ -99,6 +99,6 @@ path = argv[1]
 filelist = glob.glob(os.path.join(path,'*png'))
 random.shuffle(filelist)
 findFace(filelist, len(filelist))
-#findFace(filelist, 5)
+# findFace(filelist, 120)
 # Now organize cropped pngs
 organize(path)

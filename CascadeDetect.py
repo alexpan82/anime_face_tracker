@@ -4,6 +4,7 @@ import glob
 import math
 
 
+# Add parallel code
 def expand_face(bound_box, img_size, expand):
     # Expand symmetrically and keep within confines of image
     # bound_box = [y,h,x,w]
@@ -37,7 +38,7 @@ def expand_face(bound_box, img_size, expand):
     if new_x < 0:
         new_x = 0
 
-    return list(map(lambda x: int(x), [new_y, new_y + new_h, new_x, new_x + new_w]))
+    return list(map(lambda x: int(x), (new_y, new_y + new_h, new_x, new_x + new_w)))
 
 
 class Detect:
@@ -75,16 +76,14 @@ class Detect:
                                              minSize=(24, 24))
             for m, (x, y, w, h) in enumerate(faces):
                 # cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-                face_coord = expand_face([y, h, x, w], image.shape, 1.5)
-                new_y1 = face_coord[0]
-                new_y2 = face_coord[1]
-                new_x1 = face_coord[2]
-                new_x2 = face_coord[3]
+                face_coord = expand_face([y, h, x, w], image.shape, 1.69)
+                new_y1, new_y2, new_x1, new_x2 = face_coord
                 # cv2.imshow('hi', image[new_y1:new_y2, new_x1:new_x2])
                 # cv2.waitKey(0)
 
                 # Export cropped png file(s)
                 png_path = os.path.join(self.out_path, 'frame_%s_%s.png' % (str(n).zfill(5), str(m)))
-                cv2.imwrite(png_path, image[new_y1:new_y2, new_x1:new_x2])
+                resize = cv2.resize(image[new_y1:new_y2, new_x1:new_x2], (160,160))
+                cv2.imwrite(png_path, resize)
 
             print("Frame number:", n+1, "/", total_imgs)
