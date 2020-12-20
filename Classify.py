@@ -15,15 +15,15 @@ class Classify:
     def train(self, img_size=(160, 160), batch_size=32):
         train_dataset = image_dataset_from_directory(self.input_path,
                                                      shuffle=True,
-                                                     batch_size=BATCH_SIZE,
-                                                     image_size=IMG_SIZE,
+                                                     batch_size=batch_size,
+                                                     image_size=img_size,
                                                      validation_split=0.2,
                                                      subset="training",
                                                      seed=420)
         validation_dataset = image_dataset_from_directory(self.input_path,
                                                      shuffle=True,
-                                                     batch_size=BATCH_SIZE,
-                                                     image_size=IMG_SIZE,
+                                                     batch_size=batch_size,
+                                                     image_size=img_size,
                                                      validation_split=0.2,
                                                      subset="validation",
                                                      seed=420)
@@ -50,11 +50,34 @@ class Classify:
         ])
 
         # Rescale pixel values so that they can be accepted by the base model
-        # For now use MobileNetV3 (expects pixel values [-1,1])
+        # For now use MobileNetV2 (expects pixel values [-1,1])
         # Method comes with model
-        preprocess_input = tf.keras.applications.mobilenet_v3.preprocess_input
+        preprocess_input = tf.keras.applications.mobilenet_v2.preprocess_input
         # Alternatively could add rescaling layer to do this
         # rescale = tf.keras.layers.experimental.preprocessing.Rescaling(1./127.5, offset=-1)
+
+        # Create base model
+        # Will follow common practice to depend on last layer before the 'flatten' operation
+        # ie the bottleneck layer
+        # 1st instantiate a v2 model pre-loaded with weights
+        # include_top=False excludes top layers
+        IMG_SHAPE = img_size + (3,)
+        base_model = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE,
+                                                       include_top=False,
+                                                       weights='imagenet')
+        # Covert image into a 5x5x1280 block of features
+        image_batch, label_batch = next(iter(train_dataset))
+        feature_batch = base_model(image_batch)
+
+        # Freeze the base
+        base_model.trainable = False
+
+        # Add a classification head
+        # 1st average over the 5x5 spatial locations to covert features to a single 1280 vector/img
+        global_average_layer = tf.keras.layers.GlobalAveragePooling2D()
+        feature_batch_average = global_average_layer(feature_batch)
+
+
 
 
 
