@@ -3,7 +3,6 @@ import mss.tools
 import time
 import sys, signal
 import os
-import glob
 
 def signal_handler(signal, frame):
     print("\nprogram exiting gracefully")
@@ -27,7 +26,6 @@ class CropUtil:
         reference_time = time.time()
         frame_count = 0
 
-        # Keep capturing until 'q' is pressed
         while True:
             # Capture entire screen
             # Make sure to capture images at a particular rate (cap_rate)
@@ -39,5 +37,5 @@ class CropUtil:
                 print("Frame number:", frame_count)
                 reference_time = time.time()
 
-            # Break
+            # Break when ^C is pressed
             signal.signal(signal.SIGINT, signal_handler)

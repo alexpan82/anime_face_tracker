@@ -1,6 +1,6 @@
 name: anime_face_tracker_annotateOnly
 channels:
-	- conda-forge
+ - conda-forge
 dependencies:
-	- numpy
-	- opencv
+ - numpy
+ - opencv

@@ -1,4 +1,13 @@
 name: anime_face_tracker
+channels:
+ - conda-forge
+ - anaconda
 dependencies:
-	- numpy
-	- python-mss
+ - python=3.8
+ - numpy
+ - python-mss
+ - opencv=4.5.0
+ - matplotlib
+ - jupyterlab
+ - pip:
+   - tf-nightly-gpu
