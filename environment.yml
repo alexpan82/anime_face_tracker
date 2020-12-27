@@ -9,5 +9,4 @@ dependencies:
  - opencv=4.5.0
  - matplotlib
  - jupyterlab
- - pip:
-   - tf-nightly-gpu
+ - tensorflow-gpu
