@@ -4,16 +4,18 @@ import time
 import sys, signal
 import os
 
+
 def signal_handler(signal, frame):
     print("\nprogram exiting gracefully")
     sys.exit(0)
 
+
 class CropUtil:
     # capture_rate :: num_frames per second
-    def __init__(self, capture_rate, base_dir):
+    def __init__(self, base_dir, capture_rate):
         self.cap_rate = capture_rate
         self.path = base_dir
-        self.image_path = os.path.join(self.path, "image")
+        self.image_path = os.path.join(self.path, "images")
 
         if os.path.exists(self.image_path ):
             os.system("rm -R %s" % self.image_path )

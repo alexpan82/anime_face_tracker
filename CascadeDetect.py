@@ -11,7 +11,7 @@ def detect_face(img_list, cascade, out_path):
     # Output from CropUtil.capture
     # cascade is the trained cv2.CascadeClassifer object
     # out_path is the output directory
-    print(len(img_list), out_path)
+    print(len(img_list), " images in ", out_path)
 
     for img in img_list:
         image = cv2.imread(img, cv2.IMREAD_COLOR)
@@ -87,12 +87,12 @@ class Detect:
     def __init__(self, base_dir, xml_path="./lbpcascade_animeface.xml", threads=4):
         # Path to captured images
         self.path = base_dir
-        self.input_path = os.path.join(self.path, "image")
+        self.input_path = os.path.join(self.path, "images")
         # Path to cascade xml with trained parameters
         self.xml_path = xml_path
 
         # Path to output images
-        self.out_path = os.path.join(self.path, "cascade-image")
+        self.out_path = os.path.join(self.path, "cropped_faces")
         self.out_path_pngs = os.path.join(self.out_path, "*.png")
         if os.path.exists(self.out_path):
             os.system("rm %s" % self.out_path_pngs)
@@ -120,4 +120,4 @@ class Detect:
 
         for i in jobs:
             i.join()
-        print(time.time()-start_time)
+        print("Time to completion: ", time.time()-start_time)

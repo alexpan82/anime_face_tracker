@@ -37,15 +37,16 @@ conda activate anime_face_tracker
 
 ## 2) Get frames via screen-recording
 ```
-python main.py caputre --output /path/to/output --frames 0.2
+python main.py caputre --output /path/to/output/ --frames 0.2
 ```
 ## 3) Detect faces in each frame
 ```
-python main.py detect --output /path/to/output --threads 1
+python main.py detect --output /path/to/output/ --threads 1
 ```
 ## 4) Classify each face and output statistics
 ```
-python main.py classify --output /path/to/output
+python main.py classify --output /path/to/output/ 
+                        --model /path/to/output/transfer_model.h5
 ```
 # Train models yourself!
 Right now my classification model only works for "Quintessential Quintuplets"
@@ -54,7 +55,7 @@ You can continue to or re-train both the detector and classifier
 
 ## Retrain detector
 
-## Retrain classifier
+## Train classifier
 ### 1) Annotate faces
 ```
 # In my experience, I've found 50-200 annotated images per character
@@ -62,21 +63,25 @@ You can continue to or re-train both the detector and classifier
 # Please open an additional terminal/powershell
 # In terminal "1"
 
-python main.py server
+python serverTcp.py
 
 # In terminal "2"
 
 conda activate anime_face_tracker
-python main.py annotate --output /path/to/output
+python annotate.py annotate --output /path/to/output
 
 # Please provide annotations in terminal "1"
 # Feel free to ^C at any point
+# Outputs are written to /path/to/output/data_out.csv
+
+# Finally organize annotations for downstream processing
+python annotate.py organize --output /path/to/output
 ```
-### 2) Retrain
+### 2) Train
 ```
 # Update model
-python main.py train-classify --output /path/to/output --model
+python main.py train-classify --output /path/to/output --model /path/to/.h5
 
-# Or completely retrain
+# Or completely retrain from baseline moblilenet v2
 python main.py train-classify --output /path/to/output
 ```
