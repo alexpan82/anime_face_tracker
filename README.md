@@ -49,7 +49,7 @@ python main.py classify --output /path/to/output/
 ```
 # Train models yourself!
 Right now the classification model only works for the show "Quintessential Quintuplets"
-This was chosen as I think it would pose a challenge for the algorithm to train on, as all the character look nearly identical (as the title would suggest).
+This was chosen as I thought it would pose a challenge for the algorithm to train on since all the character look nearly identical (as the title would suggest).
 
 You can continue to or re-train both the detector and classifier
 
