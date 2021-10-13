@@ -1,8 +1,7 @@
-# Anime Facial Detector for Memes and Dreams
+# Anime Facial Detector
 This is a code base that aims to:
 * Find anime faces in any given frame
 * Categorize faces by character and return the "screen time" of any given character
-* Be a degenerate
 
 We do this by utilizing transfer learning from these "backbones" (respectively)
 * Mask_RCNN
@@ -49,7 +48,8 @@ python main.py classify --output /path/to/output/
                         --model /path/to/output/transfer_model.h5
 ```
 # Train models yourself!
-Right now my classification model only works for "Quintessential Quintuplets"
+Right now the classification model only works for the show "Quintessential Quintuplets"
+This was chosen as I think it would pose a challenge for the algorithm to train on, as all the character look nearly identical (as the title would suggest).
 
 You can continue to or re-train both the detector and classifier
 
